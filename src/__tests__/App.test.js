@@ -66,26 +66,108 @@ test("displays the correct links", () => {
 
 // Newsletter Form - Initial State
 test("the form includes text inputs for name and email address", () => {
-  // your test code here
+  // your test code 
+  const nameInput = screen.getByLabelText(/name/i);
+  expect(nameInput).toBeInTheDocument();
+
+  
+  const emailInput = screen.getByLabelText(/email/i);
+  expect(emailInput).toBeInTheDocument();
 });
+
 
 test("the form includes three checkboxes to select areas of interest", () => {
   // your test code here
-});
+  
+  
+  
+    const checkbox1 = screen.getByLabelText(/interest 1/i);
+    const checkbox2 = screen.getByLabelText(/interest 2/i);
+    const checkbox3 = screen.getByLabelText(/interest 3/i);
+  
+    expect(checkbox1).toBeInTheDocument();
+    expect(checkbox2).toBeInTheDocument();
+    expect(checkbox3).toBeInTheDocument();
+  });
+  
 
 test("the checkboxes are initially unchecked", () => {
   // your test code here
-});
+  
+
+    
+    const checkbox1 = screen.getByLabelText(/interest 1/i);
+    const checkbox2 = screen.getByLabelText(/interest 2/i);
+    const checkbox3 = screen.getByLabelText(/interest 3/i);
+  
+    expect(checkbox1).not.toBeChecked();
+    expect(checkbox2).not.toBeChecked();
+    expect(checkbox3).not.toBeChecked();
+  });
+  
+
 
 // Newsletter Form - Adding Responses
 test("the page shows information the user types into the name and email address form fields", () => {
   // your test code here
+  const checkbox1 = screen.getByLabelText(/interest 1/i);
+  const checkbox2 = screen.getByLabelText(/interest 2/i);
+  const checkbox3 = screen.getByLabelText(/interest 3/i);
+
+  expect(checkbox1).not.toBeChecked();
+  expect(checkbox2).not.toBeChecked();
+  expect(checkbox3).not.toBeChecked();
 });
+
 
 test("checked status of checkboxes changes when user clicks them", () => {
   // your test code here
-});
+  
+    
+  
+    
+    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'john@example.com' } });
+    fireEvent.click(screen.getByLabelText(/interest 1/i)); // assuming an interest checkbox is checked
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+  
+    
+    expect(screen.getByText(/form submitted successfully!/i)).toBeInTheDocument();
+  });
+  
+  
+    const checkbox1 = screen.getByLabelText(/interest 1/i);
+    const checkbox2 = screen.getByLabelText(/interest 2/i);
+    const checkbox3 = screen.getByLabelText(/interest 3/i);
+  
+    
+    expect(checkbox1).not.toBeChecked();
+    expect(checkbox2).not.toBeChecked();
+    expect(checkbox3).not.toBeChecked();
+  
+    
+    fireEvent.click(checkbox1);
+    fireEvent.click(checkbox2);
+  
+    
+    expect(checkbox1).toBeChecked();
+    expect(checkbox2).toBeChecked();
+    expect(checkbox3).not.toBeChecked();
+
+  
+
 
 test("a message is displayed when the user clicks the Submit button", () => {
   // your test code here
-});
+  
+    
+    fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'John Doe' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'john@example.com' } });
+    fireEvent.click(screen.getByLabelText(/interest 1/i)); // assuming an interest checkbox is checked
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+  
+    
+    expect(screen.getByText(/form submitted successfully!/i)).toBeInTheDocument();
+  });
+  
+
